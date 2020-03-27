@@ -1,0 +1,2 @@
+Utilisez ce répertoire si vous exécutez mysql dans un conteneur
+Use this dir if running mysql in container

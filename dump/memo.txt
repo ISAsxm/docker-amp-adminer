@@ -1,0 +1,1 @@
+Remplacez ce fichier par un fichier.sql avant de builder l'appli pour importer une base de données et pourvoir y accéder depuis adminer (à l'adresse htttp://localhost:8080 une fois l'environnement buildé avec $ docker-compose up -d)
