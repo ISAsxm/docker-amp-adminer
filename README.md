@@ -21,7 +21,7 @@ Responsable : HI
 
 * insérer les fichiers HTML, PHP, JavaScript, CSS ... dans le repo /www.
 
-* pour importer une base de données, insérer le fichier .sql dans le repo /dump avant de lancer la commande $ docker-compose up -d.
+* pour importer une base de données, insérer le fichier .sql dans le repo /dump **avant** de lancer la commande $ docker-compose up -d.
 
 * utilisez le repo /conf si vous faites tourner mySql dans un container.
 
@@ -73,8 +73,38 @@ Utilisez ces informations pour les requêtes : const DEFAULT_SQL_HOST = '172.19.
 * pour inspecter les containers :
     - $ docker inspect [nom du container]
 
-* pour supprimer les containers et les volumes de données (attention, supprime tout !) : 
-    - $ docker-compose down -v
+* pour exécuter des commandes arbitraires dans les services.
+    - $ docker-compose exec nom_du_container sh
+
+
+* pour supprimer les containers et les volumes de données (Arrête les container et supprime les container, réseaux, volumes et images créés par up) : 
+    - $ docker-compose down --rmi all --remove-orphans -v
+
+    * Par défaut, les seules choses supprimées sont :
+        - Container pour les services définis dans le fichier docker-compose.yml
+        - Réseaux définis dans la section network du fichier docker-compose.yml
+        - Le réseau par défaut, s'il est utilisé
+
+Les réseaux et volumes définis comme externes ne sont jamais supprimés.
+
+* pour tout supprimer du système une fois les containers stoppés (**faire très attention**, **supprime** du système **TOUS** les container, réseaux, images, volumes inutilisés)
+    - $ docker system prune
+
+    * Cela supprimera :
+        - tous les container arrêtés
+        - tous les réseaux non utilisés par au moins un conteneur
+        - toutes les images en suspend
+        - tout le cache de construction
+
+    - $ docker system prune -a --volumes
+
+    * Cela supprimera :
+        - tous les container arrêtés
+        - tous les réseaux non utilisés par au moins un conteneur
+        - tous les volumes non utilisés par au moins un conteneur
+        - toutes les images sans au moins un conteneur qui leur est associé
+        - tout le cache de construction
+
 
 ----------------
 
@@ -153,7 +183,32 @@ Use this information for queries : const DEFAULT_SQL_HOST = '172.19.0.2:3306';
 * to inspect all of the containers :
     - $ docker inspect [nom du container]
 
-* to delete containers and data volumes (be careful, delete everything !) :
-    - $ docker-compose down -v
+* to delete containers, images and data volumes (Stops containers and removes containers, networks, volumes, and images created by up) : 
+    - $ docker-compose down --rmi all --remove-orphans -v
+
+    * By default, the only things removed are :
+        - Containers for services defined in the Compose file
+        - Networks defined in the networks section of the Compose file
+        - The default network, if one is used
+
+Networks and volumes defined as external are never removed.
+
+* to delete everything once the containers are stopped (whatch your steps, Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes)
+    - $ docker system prune
+
+    * This will remove :
+        - all stopped containers
+        - all networks not used by at least one container
+        - all dangling images
+        - all build cache
+
+    - $ docker system prune -a --volumes
+
+    * This will remove :
+        - all stopped containers
+        - all networks not used by at least one container
+        - all volumes not used by at least one container
+        - all images without at least one container associated to them
+        - all build cache
 
 ----------------
