@@ -33,20 +33,20 @@ Responsable : HI
 ## Utilisation :
 
 
-Une fois les containers buildés et au moins un fichier index.html ou index.php inséré dans le repo /www, l'application est visible à l'adresse suivante : http://localhost:8000/        (ou port personnaliser si modifié ligne 6 dans le docker-compose.yml)
+Une fois les containers buildés et au moins un fichier index.html ou index.php inséré dans le repo /www, l'application est visible à l'adresse suivante : http://localhost:8000/        (ou port personnalisé si modifié ligne 6 dans le docker-compose.yml)
 
-Pour accéder à Adminer, l'adresse est : http://localhost:8080/      (ou port personnaliser si modifié ligne 32 dans le fichier docker-compose.yml)
+Pour accéder à Adminer, l'adresse est : http://localhost:8080/      (ou port personnalisé si modifié ligne 32 dans le fichier docker-compose.yml)
 
 
 Le sql host correspond à "l'adresse IP:port" utiliser par le container. On les retrouve avec la commande $ docker inspect [nom du container _db_ ] | grep IPAddress  et $ docker inspect [nom du container _db_ ] | grep HostPort  
 
 (ex avec le nom actuel du repo : 
 
-$ docker inspect docker_amp_myadmin_db_1 | grep IPAddress 
+$ docker container inspect docker_amp_adminer_db_1 | grep IPAddress 
 et la réponse : "IPAddress": "",
                     "IPAddress": "172.18.0.2",
 
- $ docker inspect docker_amp_myadmin_db_1 | grep HostPort
+ $ docker container inspect docker_amp_adminer_db_1 | grep HostPort
 
 et la réponse : "HostPort": "3306"
                     "HostPort": "3306"
@@ -71,7 +71,7 @@ Utilisez ces informations pour les requêtes : const DEFAULT_SQL_HOST = '172.19.
     - $ docker container ls -la
 
 * pour inspecter les containers :
-    - $ docker inspect [nom du container]
+    - $ docker container inspect [nom du container]
 
 * pour exécuter des commandes arbitraires dans les services.
     - $ docker-compose exec nom_du_container sh
@@ -152,11 +152,11 @@ The sql host corresponds to "IP address: port" used by the container. We find th
 
 (ex with the current name of the repo:  
 
-$ docker inspect docker_amp_myadmin_db_1 | grep IPAddress 
+$ docker inspect docker_amp_adminer_db_1 | grep IPAddress 
 and the answer : "IPAddress": "",
                     "IPAddress": "172.18.0.2",
 
- $ docker inspect docker_amp_myadmin_db_1 | grep HostPort
+ $ docker inspect docker_amp_adminer_db_1 | grep HostPort
 
 and the answer : "HostPort": "3306"
                     "HostPort": "3306"
